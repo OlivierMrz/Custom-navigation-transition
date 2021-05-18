@@ -7,8 +7,8 @@
 
 import UIKit
 
-public final class BaseNC: UINavigationController {
-    enum NavigationTransitionStyle {
+public class BaseNC: UINavigationController {
+    public enum NavigationTransitionStyle {
         case sideBySide
     }
 
@@ -22,7 +22,7 @@ public final class BaseNC: UINavigationController {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
 
-    init(rootViewController: UIViewController, transitionStyle: NavigationTransitionStyle? = nil) {
+    public init(rootViewController: UIViewController, transitionStyle: NavigationTransitionStyle? = nil) {
         super.init(rootViewController: rootViewController)
         self.transitionStyle = transitionStyle
         self.addBackground()
@@ -34,7 +34,7 @@ public final class BaseNC: UINavigationController {
         self.addUniversalBackground()
     }
 
-    override func viewDidLoad() {
+    public override func viewDidLoad() {
         super.viewDidLoad()
         delegate = self
         self.makeNavigationBarTransparent()
@@ -42,20 +42,20 @@ public final class BaseNC: UINavigationController {
 }
 
 extension BaseNC: UINavigationControllerDelegate {
-    func navigationController(_ navigationController: UINavigationController,
+    public func navigationController(_ navigationController: UINavigationController,
                               interactionControllerFor animationController: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
 
         let interactor = interactors.last
         return interactor??.isPerforming == true ? (interactor as? UIViewControllerInteractiveTransitioning) : nil
     }
 
-    func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
+    public func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
         if viewController == navigationController.viewControllers.first {
             interactors.removeAll()
         }
     }
 
-    func navigationController(_ navigationController: UINavigationController,
+    public func navigationController(_ navigationController: UINavigationController,
                               animationControllerFor operation: UINavigationController.Operation,
                               from fromVC: UIViewController,
                               to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
