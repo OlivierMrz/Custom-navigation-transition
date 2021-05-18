@@ -7,7 +7,7 @@
 
 import UIKit
 
-class BaseNC: UINavigationController {
+public final class BaseNC: UINavigationController {
     enum NavigationTransitionStyle {
         case sideBySide
     }
